@@ -1,3 +1,3 @@
-module github.com/product-api
+module github.com/go-microservices/product-api
 
 go 1.16

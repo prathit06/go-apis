@@ -8,11 +8,12 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/product-api/handlers"
+	"github.com/go-microservices/product-api/handlers"
 )
 
 func main() {
 	l := log.New(os.Stdout, "product_api_", log.LstdFlags)
+	// sm := mux.NewRouter()
 	sm := http.NewServeMux()
 	ph := handlers.NewProduct(l)
 
