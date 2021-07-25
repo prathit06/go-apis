@@ -14,11 +14,17 @@ import (
 
 func main() {
 	l := log.New(os.Stdout, "product_api_", log.LstdFlags)
-	// sm := http.NewServeMux()
 	sm := mux.NewRouter()
 	ph := handlers.NewProduct(l)
 
-	sm.Handle("/", ph)
+	getRouter := sm.Methods(http.MethodGet).Subrouter()
+	getRouter.HandleFunc("/", ph.GetProducts)
+
+	putRouter := sm.Methods(http.MethodPut).Subrouter()
+	putRouter.HandleFunc("/{id:[0-9]+}", ph.UpdateProducts)
+
+	postRouter := sm.Methods(http.MethodPost).Subrouter()
+	postRouter.HandleFunc("/", ph.AddProducts)
 
 	s := &http.Server{
 		Addr:         "localhost:9090",
