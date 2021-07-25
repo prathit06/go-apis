@@ -9,12 +9,13 @@ import (
 	"time"
 
 	"github.com/go-microservices/product-api/handlers"
+	"github.com/gorilla/mux"
 )
 
 func main() {
 	l := log.New(os.Stdout, "product_api_", log.LstdFlags)
-	// sm := mux.NewRouter()
-	sm := http.NewServeMux()
+	// sm := http.NewServeMux()
+	sm := mux.NewRouter()
 	ph := handlers.NewProduct(l)
 
 	sm.Handle("/", ph)
